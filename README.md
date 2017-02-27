@@ -1,7 +1,7 @@
 # arch-tool
 
 ## Descripcion
-Programa para gestionar sistemas operativos con
+Programa para gestionar sistemas operativos con\n
 gestor de paquetes Pacman como ArchLinux
 
 ## Instalacion
