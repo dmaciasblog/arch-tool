@@ -25,4 +25,4 @@ Con **archTool** podremos gestionar:
 Sin terminar, en desarrollo.
 
 ## Creditos
-Script creado por D. Macias de ![dmaciasblog.com]https://dmaciasblog.com
+Script creado por D. Macias de [dmaciasblog.com](https://dmaciasblog.com)
