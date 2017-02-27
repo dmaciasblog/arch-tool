@@ -14,12 +14,12 @@ sudo chmod +x /usr/local/bin/archTool.sh
 
 ## Caracteristicas
 Con **archTool** podremos gestionar:
-    * Actualizaciones
-    * Instalar / desinstalar paquetes
-    * Limpiar el sistema (papeleras, cache, tmp,etc..)
-    * Copias de Seguridad
-    * Obtener informacion del sistema
-    * Formatear USB
+- Actualizaciones
+- Instalar / desinstalar paquetes
+- Limpiar el sistema (papeleras, cache, tmp,etc..)
+- Copias de Seguridad
+- Obtener informacion del sistema
+- Formatear USB
 
 ## Estado
 Sin terminar, en desarrollo.
