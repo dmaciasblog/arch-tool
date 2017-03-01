@@ -344,16 +344,21 @@ function remove {
     echo
     echo -e -n "\t${verde}Teclea el paquete a desinstalar: ${normal}"
     read paq
-    if [[ sudo pacman -Qtq $paq != $paq ]]; then
-        echo
-        echo -e "\t${amarillo}Paquete no encontrado, mira las siguientes sugerencias...${normal}"
-        sleep 1
-        pacman -Qtd | grep $paq
-        echo
-        echo -e -n "\t${amarillo}Teclee correctamente el paquete a desinstalar: ${normal}"
+    p1=$(pacman -Qtq $paq)
+    until [[ "$p1" = "$paq" ]]; do
+        clear
+        echo -e "\t${amarillo}Paquete no encontrado, intente de nuevo.${normal}"
+        p2=$(expr substr "$paq" 1 1)
+        pacman -Qtq | grep --color=auto -d skip $p2
+        echo -n -e "\t${amarillo}Teclee el paquete a desinstalar: ${normal}"
         read paq
-
-    fi
+        p1=$(pacman -Qtq $paq)
+    done
+    echo
+    echo -e "\t${amarillo}Se desinstalara $paq ${normal}"
+    sudo pacman -R $paq
+    tecla
+    menu_principal
 }
 ######## FUNCION COLORES APLICACION
 ###################################
