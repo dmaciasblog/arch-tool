@@ -24,10 +24,10 @@ function menu_principal {
     echo -e "\t\t${amarillo}3.\t${verde}ELIMINAR PAQUETES"
     echo -e "\t\t${amarillo}4.\t${verde}LIMPIAR SISTEMA"
     echo -e "\t\t${amarillo}5.\t${verde}INFORMACION DEL SISTEMA"
-    echo -e "\t\t${amarillo}8.\t${verde}FORMATEAR USB"
-    echo -e "\t\t${amarillo}9.\t${verde}COPIAS DE SEGURIDAD"
-    echo -e "\t\t${amarillo}10.\t${verde}COLORES"
-    echo -e "\t\t${amarillo}11.\t${verde}SALIR${normal}"
+    echo -e "\t\t${amarillo}6.\t${verde}FORMATEAR USB"
+    echo -e "\t\t${amarillo}7.\t${verde}COPIAS DE SEGURIDAD"
+    echo -e "\t\t${amarillo}8.\t${verde}COLORES"
+    echo -e "\t\t${amarillo}9.\t${verde}SALIR${normal}"
     echo -n -e "\t\t${amarillo}Escoje una opcion [1-10]: "
     read opcionp
     case $opcionp in
@@ -46,7 +46,10 @@ function menu_principal {
         5)
             informacion
         ;;
-        10)
+        6)
+            formatear
+        ;;
+        8)
             colores
         ;;
         11)
@@ -261,6 +264,11 @@ function limpiar {
                     n)
                     limpiar
                     ;;
+                    *)
+                    echo -e "\t${amarillo}Opcion incorrecta${normal}"
+                    sleep 1
+                    limpiar
+                    ;;
             esac
             unset sn
             ;;
@@ -344,16 +352,21 @@ function remove {
     echo
     echo -e -n "\t${verde}Teclea el paquete a desinstalar: ${normal}"
     read paq
-    if [[ sudo pacman -Qtq $paq != $paq ]]; then
-        echo
-        echo -e "\t${amarillo}Paquete no encontrado, mira las siguientes sugerencias...${normal}"
-        sleep 1
-        pacman -Qtd | grep $paq
-        echo
-        echo -e -n "\t${amarillo}Teclee correctamente el paquete a desinstalar: ${normal}"
+    p1=$(pacman -Qtq $paq)
+    until [[ "$p1" = "$paq" ]]; do
+        clear
+        echo -e "\t${amarillo}Paquete no encontrado, intente de nuevo.${normal}"
+        p2=$(expr substr "$paq" 1 1)
+        pacman -Qtq | grep --color=auto -d skip $p2
+        echo -n -e "\t${amarillo}Teclee el paquete a desinstalar: ${normal}"
         read paq
-
-    fi
+        p1=$(pacman -Qtq $paq)
+    done
+    echo
+    echo -e "\t${amarillo}Se desinstalara $paq ${normal}"
+    sudo pacman -R $paq
+    tecla
+    menu_principal
 }
 ######## FUNCION COLORES APLICACION
 ###################################
@@ -517,6 +530,19 @@ function informacion {
             ;;
     esac
 
+}
+####FUNCION FORMATEAR
+########################
+function formatear {
+    clear
+    echo -e "\t${amarillo}Imprimiendo tabla de particiones."
+    echo
+    sudo fdisk -l
+    echo
+    echo -e "\t${amarillo}Comprueba atentamente la particion exacta a formatear"
+    echo -e "\tde la lista de arriba, esta accion no podra revertirse${normal}"
+    echo -e -n "\t${verde} Teclea la partición a formatear: ${normal}"
+    read particion
 }
 
 menu_principal
