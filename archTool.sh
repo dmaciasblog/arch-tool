@@ -531,6 +531,7 @@ function informacion {
     esac
 
 }
+##hacemos un cambio
 ####FUNCION FORMATEAR
 ########################
 function formatear {
