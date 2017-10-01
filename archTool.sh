@@ -173,22 +173,15 @@ function limpiar {
             echo -n -e "\t${amarillo}Desea continuar [S/N]: ${normal}"
             read sn
             case $sn in
-                    S)
+                    S|s)
                     sudo pacman -Scc
                     tecla
                     limpiar
                     ;;
-                    s)
-                    sudo pacman -Scc
-                    tecla
+                    N|n)
                     limpiar
                     ;;
-                    N)
-                    limpiar
-                    ;;
-                    n)
-                    limpiar
-                    ;;
+
             esac
             unset sn
             ;;
@@ -199,24 +192,14 @@ function limpiar {
             echo -n -e "${amarillo}Desea eliminar TODOS estos paquetes? [S/N]: ${normal}"
             read sn
             case $sn in
-                    S)
+                    S|s)
                     clear
                     echo
                     sudo pacman -R $(pacman -Qqdt)
                     tecla
                     limpiar
                     ;;
-                    s)
-                    clear
-                    echo
-                    sudo pacman -R $(pacman -Qqdt)
-                    tecla
-                    limpiar
-                    ;;
-                    N)
-                    limpiar
-                    ;;
-                    n)
+                    N|n)
                     limpiar
                     ;;
                     *)
@@ -235,24 +218,14 @@ function limpiar {
             echo -n -e "${amarillo}Desea continuar [S/N]: ${normal}"
             read sn
             case $sn in
-                    S)
+                    S|s)
                     sudo rm -rf /home/*/.local/share/Trash/*/**
                     sudo rm -rf /root/.local/share/Trash/*/**
                     echo -e "\t${amarillo}Papeleras borradas${normal}"
                     tecla
                     limpiar
                     ;;
-                    s)
-                    sudo rm -rf /home/*/.local/share/Trash/*/**
-                    sudo rm -rf /root/.local/share/Trash/*/**
-                    echo -e "\t${amarillo}Papeleras borradas${normal}"
-                    tecla
-                    limpiar
-                    ;;
-                    N)
-                    limpiar
-                    ;;
-                    n)
+                    N|n)
                     limpiar
                     ;;
                     *)
@@ -279,7 +252,7 @@ function limpiar {
             echo -n -e "\t\t${amarillo}Desea continuar? [S/N]: "
             read sn
             case $sn in
-                    S)
+                    S|s)
                     clear
                     echo -e "\tBorrando cache de pacman"
                     sudo pacman -Scc
@@ -295,30 +268,7 @@ function limpiar {
                     tecla
                     limpiar
                     ;;
-                    s)
-                    clear
-                    echo -e "\tBorrando cache de pacman"
-                    sudo pacman -Scc
-                    echo
-                    echo -e "\t${amarillo}Borrando paquetes huerfanos${normal}"
-                    echo
-                    sudo pacman -R $(pacman -Qqdt)
-                    echo
-                    echo -e "\t${amarillo}Borrando papeleras${normal}"
-                    echo
-                    sudo rm -rf /home/*/.local/share/Trash/*/**
-                    sudo rm -rf /root/.local/share/Trash/*/**
-                    echo -e "\t${amarillo}Borrando archivos temporales${normal}"
-                    rm -rf /tmp/* &> /dev/null
-                    echo -e "\t${amarillo}Todo borrado con exito..${normal}"
-                    sleep 1
-                    tecla
-                    limpiar
-                    ;;
-                    N)
-                    limpiar
-                    ;;
-                    n)
+                    N|n)
                     limpiar
                     ;;
             esac
