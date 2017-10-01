@@ -8,7 +8,7 @@
 #   | creado por diego macias de dmaciasblog|
 #   +---------------------------------------+
 
-
+##hacemos un cambio
 
 
 function menu_principal {
@@ -96,21 +96,12 @@ function busins {
                 echo -e "\t${verde}Instalar algun paquete?? [ S/N]${normal}"
                 read insono
                 case $insono in
-                    S)
+                    S|s)
                         instalar
                         tecla
                         busins
                     ;;
-                    s)
-                        instalar
-                        tecla
-                        busins
-                    ;;
-                    N)
-                        tecla
-                        busins
-                    ;;
-                    n)
+                    N|n)
                         tecla
                         busins
                     ;;
